@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>联系我们 · 京东健康医药数字营销中心</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg-void: #030608; --bg-deep: #050a14; --bg-card: rgba(8,18,40,0.75); --border-subtle: rgba(0,180,255,0.08); --border-glow: rgba(0,200,255,0.2); --border-active: rgba(0,220,255,0.4); --cyan: #00d4ff; --cyan-dim: #0099cc; --blue-electric: #2d6ef7; --red-jd: #e02020; --text-primary: #e8eef8; --text-secondary: rgba(200,220,255,0.6); --text-dim: rgba(160,190,230,0.4); --font-display: 'Space Grotesk','PingFang SC','Noto Sans SC',sans-serif; --font-body: 'PingFang SC','Noto Sans SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; --radius-md: 16px; --radius-full: 9999px; --ease-out: cubic-bezier(0.16,1,0.3,1); }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); font-size: 15px; line-height: 1.8; color: var(--text-primary); background: var(--bg-void); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 72px; background: rgba(3,6,8,0.8); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border-subtle); }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-logo-text { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text-primary); }
+    .nav-logo-text .jdh { color: var(--red-jd); }
+    .nav-logo-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.12); }
+    .nav-logo-sub { font-size: 14px; color: var(--text-secondary); }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 14px; transition: color 300ms; }
+    .nav-links a:hover, .nav-links a.active { color: var(--cyan); }
+    .btn-nav { padding: 10px 24px; background: linear-gradient(135deg, var(--cyan-dim), var(--blue-electric)); color: var(--text-primary); border: none; border-radius: var(--radius-full); font-size: 13px; font-weight: 500; cursor: pointer; text-decoration: none; box-shadow: 0 0 20px rgba(0,212,255,0.2); }
+
+    .page-header { padding: 160px 48px 80px; text-align: center; position: relative; overflow: hidden; }
+    .page-header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 50% 50% at 50% 30%, rgba(0,60,140,0.3) 0%, transparent 70%), var(--bg-void); }
+    .page-header-content { position: relative; z-index: 1; }
+    .page-header h1 { font-size: 48px; font-weight: 700; margin-bottom: 16px; }
+    .page-header h1 .highlight { color: var(--cyan); }
+    .page-header p { font-size: 16px; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+
+    .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; max-width: 1000px; margin: 0 auto; padding: 0 48px 120px; }
+    .contact-form { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 40px; backdrop-filter: blur(16px); }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 13px; color: var(--text-secondary); margin-bottom: 6px; font-weight: 500; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px 16px; background: rgba(0,10,30,0.6); border: 1px solid var(--border-subtle); border-radius: 8px; color: var(--text-primary); font-size: 14px; font-family: var(--font-body); transition: border-color 300ms; outline: none; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--border-active); box-shadow: 0 0 12px rgba(0,200,255,0.1); }
+    .form-group textarea { height: 120px; resize: vertical; }
+    .form-group select { appearance: none; cursor: pointer; }
+    .btn-submit { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--cyan-dim), var(--blue-electric)); color: var(--text-primary); border: none; border-radius: var(--radius-full); font-size: 15px; font-weight: 500; font-family: var(--font-body); cursor: pointer; transition: box-shadow 300ms, transform 300ms var(--ease-out); box-shadow: 0 4px 24px rgba(0,180,255,0.25); }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(0,180,255,0.4); }
+
+    .contact-info { display: flex; flex-direction: column; gap: 32px; justify-content: center; }
+    .info-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 28px; backdrop-filter: blur(16px); }
+    .info-card h4 { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+    .info-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.8; }
+    .info-card .info-highlight { color: var(--cyan); font-weight: 500; }
+
+    .grain { position: fixed; inset: 0; pointer-events: none; z-index: 9998; opacity: 0.035; mix-blend-mode: overlay; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out); }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) { .nav { padding: 0 20px; } .nav-links { display: none; } .page-header { padding: 120px 20px 60px; } .page-header h1 { font-size: 32px; } .contact-layout { grid-template-columns: 1fr; padding: 0 20px 80px; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+  <nav class="nav">
+    <a class="nav-logo" href="index.html"><span class="nav-logo-text"><span class="jdh">JDH</span> 京东健康</span><span class="nav-logo-divider"></span><span class="nav-logo-sub">医药数字营销中心</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="solutions.html">解决方案</a></li>
+      <li><a href="capabilities.html">能力中心</a></li>
+      <li><a href="about.html">关于我们</a></li>
+      <li><a href="contact.html" class="active">联系我们</a></li>
+    </ul>
+    <a href="contact.html" class="btn-nav">商务合作</a>
+  </nav>
+
+  <section class="page-header"><div class="page-header-content"><h1><span class="highlight">联系</span>我们</h1><p>期待与您携手，共建医药数字营销新未来</p></div></section>
+
+  <section class="contact-layout">
+    <div class="contact-form reveal">
+      <div class="form-group">
+        <label>公司名称</label>
+        <input type="text" placeholder="请输入贵公司名称">
+      </div>
+      <div class="form-group">
+        <label>联系人</label>
+        <input type="text" placeholder="您的姓名">
+      </div>
+      <div class="form-group">
+        <label>联系电话</label>
+        <input type="tel" placeholder="手机号码">
+      </div>
+      <div class="form-group">
+        <label>合作类型</label>
+        <select>
+          <option>品牌营销合作</option>
+          <option>内容营销合作</option>
+          <option>数据服务合作</option>
+          <option>电商运营合作</option>
+          <option>其他合作</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>合作需求</label>
+        <textarea placeholder="请简要描述您的合作需求……"></textarea>
+      </div>
+      <button class="btn-submit">提交合作意向</button>
+    </div>
+
+    <div class="contact-info reveal" style="transition-delay:200ms">
+      <div class="info-card">
+        <h4>商务合作</h4>
+        <p>邮箱：<span class="info-highlight">marketing@jdhealth.com</span></p>
+        <p>电话：<span class="info-highlight">010-8888-8888</span></p>
+      </div>
+      <div class="info-card">
+        <h4>办公地址</h4>
+        <p>北京市大兴区亦庄经济技术开发区<br>京东总部大厦</p>
+      </div>
+      <div class="info-card">
+        <h4>工作时间</h4>
+        <p>周一至周五 9:00 - 18:00<br>节假日休息</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); } }); }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>

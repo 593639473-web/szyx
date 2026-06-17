@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>关于我们 · 京东健康医药数字营销中心</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg-void: #030608; --bg-deep: #050a14; --bg-card: rgba(8,18,40,0.75); --border-subtle: rgba(0,180,255,0.08); --border-glow: rgba(0,200,255,0.2); --cyan: #00d4ff; --cyan-dim: #0099cc; --blue-electric: #2d6ef7; --red-jd: #e02020; --text-primary: #e8eef8; --text-secondary: rgba(200,220,255,0.6); --text-dim: rgba(160,190,230,0.4); --font-display: 'Space Grotesk','PingFang SC','Noto Sans SC',sans-serif; --font-body: 'PingFang SC','Noto Sans SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; --radius-md: 16px; --radius-full: 9999px; --ease-out: cubic-bezier(0.16,1,0.3,1); }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); font-size: 15px; line-height: 1.8; color: var(--text-primary); background: var(--bg-void); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 72px; background: rgba(3,6,8,0.8); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border-subtle); }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-logo-text { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text-primary); }
+    .nav-logo-text .jdh { color: var(--red-jd); }
+    .nav-logo-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.12); }
+    .nav-logo-sub { font-size: 14px; color: var(--text-secondary); }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 14px; transition: color 300ms; }
+    .nav-links a:hover, .nav-links a.active { color: var(--cyan); }
+    .btn-nav { padding: 10px 24px; background: linear-gradient(135deg, var(--cyan-dim), var(--blue-electric)); color: var(--text-primary); border: none; border-radius: var(--radius-full); font-size: 13px; font-weight: 500; cursor: pointer; text-decoration: none; box-shadow: 0 0 20px rgba(0,212,255,0.2); }
+
+    .page-header { padding: 160px 48px 80px; text-align: center; position: relative; overflow: hidden; }
+    .page-header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 50% 50% at 50% 30%, rgba(0,60,140,0.3) 0%, transparent 70%), var(--bg-void); }
+    .page-header-content { position: relative; z-index: 1; }
+    .page-header h1 { font-size: 48px; font-weight: 700; margin-bottom: 16px; }
+    .page-header h1 .highlight { color: var(--cyan); }
+    .page-header p { font-size: 16px; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+
+    .about-content { max-width: 900px; margin: 0 auto; padding: 0 48px 120px; }
+    .about-block { margin-bottom: 60px; }
+    .about-block h2 { font-size: 24px; font-weight: 700; margin-bottom: 16px; color: var(--text-primary); border-left: 3px solid var(--cyan); padding-left: 16px; }
+    .about-block p { font-size: 15px; color: var(--text-secondary); line-height: 2; }
+
+    .timeline { position: relative; padding-left: 32px; border-left: 1px solid var(--border-glow); }
+    .timeline-item { margin-bottom: 32px; position: relative; }
+    .timeline-item::before { content: ''; position: absolute; left: -37px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 10px var(--cyan); }
+    .timeline-item h4 { font-size: 16px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+    .timeline-item p { font-size: 13px; color: var(--text-dim); }
+
+    .grain { position: fixed; inset: 0; pointer-events: none; z-index: 9998; opacity: 0.035; mix-blend-mode: overlay; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out); }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) { .nav { padding: 0 20px; } .nav-links { display: none; } .page-header { padding: 120px 20px 60px; } .page-header h1 { font-size: 32px; } .about-content { padding: 0 20px 80px; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+  <nav class="nav">
+    <a class="nav-logo" href="index.html"><span class="nav-logo-text"><span class="jdh">JDH</span> 京东健康</span><span class="nav-logo-divider"></span><span class="nav-logo-sub">医药数字营销中心</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="solutions.html">解决方案</a></li>
+      <li><a href="capabilities.html">能力中心</a></li>
+      <li><a href="about.html" class="active">关于我们</a></li>
+      <li><a href="contact.html">联系我们</a></li>
+    </ul>
+    <a href="contact.html" class="btn-nav">商务合作</a>
+  </nav>
+
+  <section class="page-header"><div class="page-header-content"><h1><span class="highlight">关于</span>我们</h1><p>京东健康医药数字营销中心，构建医药行业数字化营销新生态</p></div></section>
+
+  <section class="about-content">
+    <div class="about-block reveal">
+      <h2>我们是谁</h2>
+      <p>京东健康医药数字营销中心隶属于京东健康，是连接医药企业与患者的数字化桥梁。依托京东健康平台 1.8 亿+活跃用户、1000+合作药企的生态资源，为医药品牌提供从品牌建设到销售转化的全链路数字营销服务。</p>
+    </div>
+
+    <div class="about-block reveal">
+      <h2>我们的使命</h2>
+      <p>以数据与内容为核心驱动力，帮助每一家医药企业精准触达目标患者，让好药被更多需要它的人看见。同时，通过专业的健康内容体系，提升患者健康认知，助力健康中国建设。</p>
+    </div>
+
+    <div class="about-block reveal">
+      <h2>发展历程</h2>
+      <div class="timeline">
+        <div class="timeline-item"><h4>2020 年</h4><p>京东健康医药数字营销中心正式成立</p></div>
+        <div class="timeline-item"><h4>2021 年</h4><p>合作药企突破 500 家，年度整合营销活动超 2000 场</p></div>
+        <div class="timeline-item"><h4>2022 年</h4><p>全域内容曝光突破 50 亿，医药电商市场份额稳居 TOP1</p></div>
+        <div class="timeline-item"><h4>2023 年</h4><p>合作药企超 800 家，推出数据洞察平台与智能营销工具</p></div>
+        <div class="timeline-item"><h4>2024 年</h4><p>覆盖 1.8 亿+活跃用户，年度营销活动超 5000 场，内容曝光 100 亿+</p></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); } }); }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>

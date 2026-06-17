@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>解决方案 · 京东健康医药数字营销中心</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-void: #030608;
+      --bg-deep: #050a14;
+      --bg-surface: #0a1225;
+      --bg-card: rgba(8, 18, 40, 0.75);
+      --border-subtle: rgba(0, 180, 255, 0.08);
+      --border-glow: rgba(0, 200, 255, 0.2);
+      --cyan: #00d4ff;
+      --cyan-dim: #0099cc;
+      --blue-bright: #4d9bff;
+      --blue-electric: #2d6ef7;
+      --purple-glow: #7b61ff;
+      --red-jd: #e02020;
+      --text-primary: #e8eef8;
+      --text-secondary: rgba(200, 220, 255, 0.6);
+      --text-dim: rgba(160, 190, 230, 0.4);
+      --font-display: 'Space Grotesk', 'PingFang SC', 'Noto Sans SC', sans-serif;
+      --font-body: 'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      --radius-md: 16px;
+      --radius-full: 9999px;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-primary);
+      background: var(--bg-void);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 72px;
+      background: rgba(3, 6, 8, 0.8);
+      backdrop-filter: blur(24px) saturate(1.2);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo-text {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .nav-logo-text .jdh { color: var(--red-jd); }
+
+    .nav-logo-divider {
+      width: 1px; height: 20px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .nav-logo-sub {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 300ms var(--ease-smooth);
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--cyan);
+    }
+
+    .btn-nav {
+      padding: 10px 24px;
+      background: linear-gradient(135deg, var(--cyan-dim), var(--blue-electric));
+      color: var(--text-primary);
+      border: none;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+      transition: box-shadow 300ms, transform 300ms var(--ease-out);
+    }
+
+    .btn-nav:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 32px rgba(0, 212, 255, 0.4);
+    }
+
+    /* 页面头部 */
+    .page-header {
+      padding: 160px 48px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 50% 50% at 50% 30%, rgba(0, 60, 140, 0.3) 0%, transparent 70%),
+        var(--bg-void);
+    }
+
+    .page-header-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-header h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .page-header h1 .highlight {
+      color: var(--cyan);
+    }
+
+    .page-header p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* 解决方案卡片 */
+    .solutions {
+      padding: 0 48px 120px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .solution-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      padding: 60px;
+      margin-bottom: 40px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(16px);
+      transition: border-color 300ms, box-shadow 600ms var(--ease-out);
+    }
+
+    .solution-card:hover {
+      border-color: var(--border-glow);
+      box-shadow: 0 0 40px rgba(0, 180, 255, 0.06);
+    }
+
+    .solution-card:nth-child(even) {
+      direction: rtl;
+    }
+
+    .solution-card:nth-child(even) > * {
+      direction: ltr;
+    }
+
+    .solution-info h3 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+
+    .solution-info p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.9;
+      margin-bottom: 24px;
+    }
+
+    .solution-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .solution-tag {
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-glow);
+      font-size: 12px;
+      color: var(--cyan);
+      background: rgba(0, 212, 255, 0.04);
+    }
+
+    .solution-visual {
+      height: 260px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .solution-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      background: radial-gradient(circle at 50% 50%, rgba(0, 140, 255, 0.1) 0%, rgba(5, 10, 20, 0.8) 70%);
+      border: 1px solid rgba(0, 180, 255, 0.1);
+    }
+
+    .solution-visual svg {
+      width: 80px; height: 80px;
+      stroke: var(--cyan);
+      fill: none;
+      stroke-width: 1;
+      opacity: 0.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* 滚动入场 */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out);
+    }
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 噪点 */
+    .grain {
+      position: fixed; inset: 0; pointer-events: none; z-index: 9998;
+      opacity: 0.035; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    }
+
+    @media (max-width: 768px) {
+      .nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .page-header { padding: 120px 20px 60px; }
+      .page-header h1 { font-size: 32px; }
+      .solutions { padding: 0 20px 80px; }
+      .solution-card { grid-template-columns: 1fr; padding: 32px; }
+      .solution-card:nth-child(even) { direction: ltr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grain"></div>
+
+  <nav class="nav">
+    <a class="nav-logo" href="index.html">
+      <span class="nav-logo-text"><span class="jdh">JDH</span> 京东健康</span>
+      <span class="nav-logo-divider"></span>
+      <span class="nav-logo-sub">医药数字营销中心</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="solutions.html" class="active">解决方案</a></li>
+      <li><a href="capabilities.html">能力中心</a></li>
+      <li><a href="about.html">关于我们</a></li>
+      <li><a href="contact.html">联系我们</a></li>
+    </ul>
+    <a href="contact.html" class="btn-nav">商务合作</a>
+  </nav>
+
+  <section class="page-header">
+    <div class="page-header-content">
+      <h1><span class="highlight">解决</span>方案</h1>
+      <p>围绕医药营销全链路，提供从品牌曝光到销售转化的一站式数字营销解决方案</p>
+    </div>
+  </section>
+
+  <section class="solutions">
+    <div class="solution-card reveal">
+      <div class="solution-info">
+        <h3>品牌增长方案</h3>
+        <p>通过京东健康平台的海量用户触达能力，帮助医药品牌快速建立认知、提升影响力。结合搜索、信息流、开屏等多触点资源，实现全场景品牌曝光。</p>
+        <div class="solution-tags">
+          <span class="solution-tag">搜索营销</span>
+          <span class="solution-tag">信息流广告</span>
+          <span class="solution-tag">开屏资源</span>
+          <span class="solution-tag">品牌专区</span>
+        </div>
+      </div>
+      <div class="solution-visual">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      </div>
+    </div>
+
+    <div class="solution-card reveal">
+      <div class="solution-info">
+        <h3>内容营销方案</h3>
+        <p>以专业医学内容为核心，通过科普文章、视频、直播等多形式内容，构建患者教育体系。联合 KOL/KOC，打造可信赖的健康内容生态。</p>
+        <div class="solution-tags">
+          <span class="solution-tag">科普内容</span>
+          <span class="solution-tag">医生 IP</span>
+          <span class="solution-tag">直播带教</span>
+          <span class="solution-tag">患者社区</span>
+        </div>
+      </div>
+      <div class="solution-visual">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      </div>
+    </div>
+
+    <div class="solution-card reveal">
+      <div class="solution-info">
+        <h3>患者全链路方案</h3>
+        <p>从疾病认知、在线问诊、用药指导到复购管理，覆盖患者完整就医链路。通过数据驱动的精准触达，提升患者依从性和复购率。</p>
+        <div class="solution-tags">
+          <span class="solution-tag">患者触达</span>
+          <span class="solution-tag">智能随访</span>
+          <span class="solution-tag">用药提醒</span>
+          <span class="solution-tag">复购引导</span>
+        </div>
+      </div>
+      <div class="solution-visual">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+    </div>
+
+    <div class="solution-card reveal">
+      <div class="solution-info">
+        <h3>数据洞察方案</h3>
+        <p>基于京东健康大数据能力，提供行业趋势分析、竞品监测、用户画像洞察。帮助药企精准定位目标人群，优化营销策略。</p>
+        <div class="solution-tags">
+          <span class="solution-tag">行业报告</span>
+          <span class="solution-tag">用户画像</span>
+          <span class="solution-tag">效果归因</span>
+          <span class="solution-tag">竞品分析</span>
+        </div>
+      </div>
+      <div class="solution-visual">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+
+</body>
+</html>
