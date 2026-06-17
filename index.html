@@ -630,6 +630,24 @@
       background: linear-gradient(180deg, var(--bg-void) 0%, var(--bg-deep) 100%);
     }
 
+    .stats-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 200px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(0, 140, 255, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .stats-section::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 180, 255, 0.15), transparent);
+    }
+
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -955,32 +973,6 @@
       50% { opacity: 1; transform: scale(1.2); }
     }
 
-    /* ========== 全屏扫描线 ========== */
-    .scanline {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 3;
-    }
-
-    .scanline::before {
-      content: '';
-      position: absolute;
-      top: -100%;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.4), rgba(0, 212, 255, 0.6), rgba(0, 212, 255, 0.4), transparent);
-      box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), 0 0 60px rgba(0, 212, 255, 0.1);
-      animation: scanDown 8s linear infinite;
-    }
-
-    @keyframes scanDown {
-      0% { top: -2px; }
-      100% { top: 100%; }
-    }
-
     /* ========== 全局浮动粒子（Hero 外） ========== */
     .ambient-particles {
       position: absolute;
@@ -1056,6 +1048,150 @@
 
     .orbit-node-icon {
       position: relative;
+    }
+
+    /* ========== 流星效果 ========== */
+    .meteors {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .meteor {
+      position: absolute;
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(0, 212, 255, 0.8), transparent);
+      border-radius: 1px;
+      animation: meteorShoot 4s linear infinite;
+      opacity: 0;
+    }
+
+    .meteor:nth-child(1) { top: 15%; left: -120px; animation-delay: 0s; animation-duration: 3s; }
+    .meteor:nth-child(2) { top: 35%; left: -120px; animation-delay: 2s; animation-duration: 4s; width: 80px; }
+    .meteor:nth-child(3) { top: 55%; left: -120px; animation-delay: 5s; animation-duration: 3.5s; width: 150px; background: linear-gradient(90deg, rgba(123, 97, 255, 0.6), transparent); }
+    .meteor:nth-child(4) { top: 72%; left: -120px; animation-delay: 7s; animation-duration: 2.8s; width: 60px; }
+    .meteor:nth-child(5) { top: 25%; left: -120px; animation-delay: 3.5s; animation-duration: 4.5s; width: 100px; background: linear-gradient(90deg, rgba(255, 255, 255, 0.5), transparent); }
+
+    @keyframes meteorShoot {
+      0% { transform: translateX(0) rotate(-15deg); opacity: 0; }
+      5% { opacity: 1; }
+      95% { opacity: 0.8; }
+      100% { transform: translateX(calc(100vw + 200px)) rotate(-15deg); opacity: 0; }
+    }
+
+    /* ========== JDH 电弧效果 ========== */
+    .orbit-arcs {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px; height: 300px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .arc {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1px solid transparent;
+    }
+
+    .arc--1 {
+      inset: 10px;
+      border-top-color: rgba(0, 212, 255, 0.5);
+      border-right-color: rgba(0, 212, 255, 0.2);
+      animation: arcSpin1 2.5s linear infinite;
+    }
+
+    .arc--2 {
+      inset: 25px;
+      border-bottom-color: rgba(77, 155, 255, 0.4);
+      border-left-color: rgba(77, 155, 255, 0.15);
+      animation: arcSpin2 3s linear infinite reverse;
+    }
+
+    .arc--3 {
+      inset: 5px;
+      border-right-color: rgba(123, 97, 255, 0.3);
+      animation: arcSpin1 1.8s linear infinite;
+    }
+
+    @keyframes arcSpin1 {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes arcSpin2 {
+      to { transform: rotate(-360deg); }
+    }
+
+    /* ========== 全息六边形网格 ========== */
+    .hex-grid {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      pointer-events: none;
+      opacity: 0.12;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='52'%3E%3Cpolygon fill='none' stroke='%2300d4ff' stroke-width='0.5' points='30,1 55,14 55,38 30,51 5,38 5,14'/%3E%3C/svg%3E");
+      background-size: 60px 52px;
+      mask-image: radial-gradient(circle, black 20%, transparent 60%);
+      -webkit-mask-image: radial-gradient(circle, black 20%, transparent 60%);
+      animation: hexRotate 80s linear infinite;
+    }
+
+    @keyframes hexRotate {
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* ========== 能力区动态背景光球 ========== */
+    .bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      animation: orbFloat 12s ease-in-out infinite;
+    }
+
+    .bg-orb--1 {
+      width: 400px; height: 400px;
+      top: -100px; left: -100px;
+      background: rgba(0, 100, 200, 0.06);
+    }
+
+    .bg-orb--2 {
+      width: 300px; height: 300px;
+      bottom: -80px; right: -80px;
+      background: rgba(123, 97, 255, 0.05);
+      animation-delay: 4s;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(30px, -20px); }
+    }
+
+    /* ========== 能力区渐变流动边框 ========== */
+    .capabilities {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .capabilities::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), var(--blue-bright), var(--purple-glow), transparent);
+      background-size: 200% 100%;
+      animation: borderFlow 4s linear infinite;
+    }
+
+    @keyframes borderFlow {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
     }
 
     /* ========== 卡片悬停倾斜 ========== */
@@ -1234,7 +1370,6 @@
     <div class="hero-bg"></div>
     <div class="hero-grid"></div>
     <div class="hero-spotlight"></div>
-    <div class="scanline"></div>
 
     <!-- 光束射线 -->
     <div class="hero-rays"></div>
@@ -1248,6 +1383,15 @@
     <div class="lens-flare lens-flare--3"></div>
     <div class="lens-flare lens-flare--4"></div>
     <div class="cross-flare"></div>
+
+    <!-- 流星 -->
+    <div class="meteors">
+      <div class="meteor"></div>
+      <div class="meteor"></div>
+      <div class="meteor"></div>
+      <div class="meteor"></div>
+      <div class="meteor"></div>
+    </div>
 
     <!-- 环境粒子 -->
     <div class="ambient-particles">
@@ -1277,8 +1421,14 @@
       <div class="orbit-ring orbit-ring--2"></div>
       <div class="orbit-ring orbit-ring--3"></div>
       <div class="orbit-earth-atmo"></div>
+      <div class="hex-grid"></div>
       <div class="orbit-earth"></div>
       <div class="orbit-earth-highlight"></div>
+      <div class="orbit-arcs">
+        <div class="arc arc--1"></div>
+        <div class="arc arc--2"></div>
+        <div class="arc arc--3"></div>
+      </div>
       <span class="orbit-center">JDH</span>
       <div class="orbit-particles">
         <span></span><span></span><span></span><span></span><span></span>
@@ -1355,6 +1505,8 @@
 
   <!-- 能力模块 -->
   <section class="capabilities" id="capabilities">
+    <div class="bg-orb bg-orb--1"></div>
+    <div class="bg-orb bg-orb--2"></div>
     <h2 class="section-title reveal">一站式医药数字营销能力</h2>
     <div class="capabilities-grid">
       <div class="cap-card reveal" style="transition-delay:0ms">
