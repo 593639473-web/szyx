@@ -814,16 +814,346 @@
       transform: translateY(0);
     }
 
-    /* ========== 底部光效 ========== */
-    .hero-bottom-glow {
+    /* ========== 光束射线 ========== */
+    .hero-rays {
       position: absolute;
-      bottom: -100px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 1200px;
-      height: 300px;
-      background: radial-gradient(ellipse 50% 100% at 50% 100%, rgba(0, 100, 200, 0.12) 0%, transparent 70%);
+      top: 50%; left: 60%;
+      transform: translate(-50%, -50%);
+      width: 800px; height: 800px;
       pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-rays::before,
+    .hero-rays::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform-origin: center;
+    }
+
+    .hero-rays::before {
+      width: 2px; height: 600px;
+      background: linear-gradient(180deg, transparent, rgba(0, 200, 255, 0.15), transparent);
+      transform: translate(-50%, -50%) rotate(25deg);
+      animation: rayPulse 4s ease-in-out infinite;
+    }
+
+    .hero-rays::after {
+      width: 2px; height: 500px;
+      background: linear-gradient(180deg, transparent, rgba(0, 140, 255, 0.1), transparent);
+      transform: translate(-50%, -50%) rotate(-35deg);
+      animation: rayPulse 4s ease-in-out infinite 1.5s;
+    }
+
+    @keyframes rayPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    .ray-extra {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .ray-extra--1 {
+      top: 50%; left: 60%;
+      width: 1px; height: 400px;
+      background: linear-gradient(180deg, transparent, rgba(77, 155, 255, 0.12), transparent);
+      transform: translate(-50%, -50%) rotate(60deg);
+      animation: rayPulse 5s ease-in-out infinite 0.8s;
+    }
+
+    .ray-extra--2 {
+      top: 50%; left: 60%;
+      width: 1px; height: 450px;
+      background: linear-gradient(180deg, transparent, rgba(0, 212, 255, 0.08), transparent);
+      transform: translate(-50%, -50%) rotate(-60deg);
+      animation: rayPulse 6s ease-in-out infinite 2s;
+    }
+
+    .ray-extra--3 {
+      top: 50%; left: 60%;
+      width: 1.5px; height: 350px;
+      background: linear-gradient(180deg, transparent, rgba(123, 97, 255, 0.1), transparent);
+      transform: translate(-50%, -50%) rotate(80deg);
+      animation: rayPulse 4.5s ease-in-out infinite 3s;
+    }
+
+    /* ========== 镜头光晕 ========== */
+    .lens-flare {
+      position: absolute;
+      pointer-events: none;
+      border-radius: 50%;
+      animation: flarePulse 6s ease-in-out infinite;
+    }
+
+    .lens-flare--1 {
+      top: 30%; left: 55%;
+      width: 120px; height: 120px;
+      background: radial-gradient(circle, rgba(0, 200, 255, 0.15) 0%, transparent 70%);
+      animation-delay: 0s;
+    }
+
+    .lens-flare--2 {
+      top: 45%; left: 70%;
+      width: 60px; height: 60px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      animation-delay: 1s;
+    }
+
+    .lens-flare--3 {
+      top: 60%; left: 50%;
+      width: 40px; height: 40px;
+      background: radial-gradient(circle, rgba(0, 180, 255, 0.2) 0%, transparent 70%);
+      animation-delay: 2s;
+    }
+
+    .lens-flare--4 {
+      top: 25%; left: 75%;
+      width: 80px; height: 80px;
+      background: radial-gradient(circle, rgba(123, 97, 255, 0.1) 0%, transparent 70%);
+      animation-delay: 3s;
+    }
+
+    @keyframes flarePulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.4); opacity: 1; }
+    }
+
+    /* 十字光芒 */
+    .cross-flare {
+      position: absolute;
+      top: 38%; left: 63%;
+      width: 80px; height: 80px;
+      pointer-events: none;
+      animation: crossPulse 3s ease-in-out infinite;
+    }
+
+    .cross-flare::before,
+    .cross-flare::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 2px;
+    }
+
+    .cross-flare::before {
+      width: 2px; height: 60px;
+      box-shadow: 0 0 10px rgba(0, 200, 255, 0.8), 0 0 30px rgba(0, 200, 255, 0.4);
+    }
+
+    .cross-flare::after {
+      width: 60px; height: 2px;
+      box-shadow: 0 0 10px rgba(0, 200, 255, 0.8), 0 0 30px rgba(0, 200, 255, 0.4);
+    }
+
+    @keyframes crossPulse {
+      0%, 100% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* ========== 全屏扫描线 ========== */
+    .scanline {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 3;
+    }
+
+    .scanline::before {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.4), rgba(0, 212, 255, 0.6), rgba(0, 212, 255, 0.4), transparent);
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), 0 0 60px rgba(0, 212, 255, 0.1);
+      animation: scanDown 8s linear infinite;
+    }
+
+    @keyframes scanDown {
+      0% { top: -2px; }
+      100% { top: 100%; }
+    }
+
+    /* ========== 全局浮动粒子（Hero 外） ========== */
+    .ambient-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .ambient-particles span {
+      position: absolute;
+      width: 2px; height: 2px;
+      background: var(--cyan);
+      border-radius: 50%;
+      opacity: 0;
+      animation: ambientFloat 10s ease-in-out infinite;
+    }
+
+    .ambient-particles span:nth-child(1) { left: 5%; top: 30%; animation-delay: 0s; animation-duration: 8s; }
+    .ambient-particles span:nth-child(2) { left: 15%; top: 50%; animation-delay: 2s; animation-duration: 12s; }
+    .ambient-particles span:nth-child(3) { left: 8%; top: 70%; animation-delay: 4s; animation-duration: 9s; width: 3px; height: 3px; }
+    .ambient-particles span:nth-child(4) { left: 25%; top: 80%; animation-delay: 1s; animation-duration: 11s; }
+    .ambient-particles span:nth-child(5) { left: 90%; top: 25%; animation-delay: 3s; animation-duration: 10s; }
+    .ambient-particles span:nth-child(6) { left: 85%; top: 60%; animation-delay: 5s; animation-duration: 7s; width: 3px; height: 3px; background: var(--purple-glow); }
+    .ambient-particles span:nth-child(7) { left: 92%; top: 75%; animation-delay: 2.5s; animation-duration: 13s; }
+    .ambient-particles span:nth-child(8) { left: 45%; top: 15%; animation-delay: 6s; animation-duration: 9s; background: rgba(255,255,255,0.6); }
+
+    @keyframes ambientFloat {
+      0%, 100% { transform: translateY(0) scale(0); opacity: 0; }
+      10% { opacity: 0.8; transform: translateY(-10px) scale(1); }
+      90% { opacity: 0.3; transform: translateY(-60px) scale(0.5); }
+    }
+
+    /* ========== 节点连接脉冲线 ========== */
+    .orbit-connection {
+      position: absolute;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    .orbit-connection line {
+      stroke: rgba(0, 180, 255, 0.1);
+      stroke-width: 1;
+      stroke-dasharray: 4 8;
+      animation: dashFlow 3s linear infinite;
+    }
+
+    @keyframes dashFlow {
+      to { stroke-dashoffset: -24; }
+    }
+
+    /* ========== 节点脉冲动画 ========== */
+    .orbit-node-icon::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px solid var(--cyan);
+      opacity: 0;
+      animation: nodePulse 3s ease-out infinite;
+    }
+
+    .orbit-node--1 .orbit-node-icon::after { animation-delay: 0s; }
+    .orbit-node--2 .orbit-node-icon::after { animation-delay: 0.5s; }
+    .orbit-node--3 .orbit-node-icon::after { animation-delay: 1s; }
+    .orbit-node--4 .orbit-node-icon::after { animation-delay: 1.5s; }
+    .orbit-node--5 .orbit-node-icon::after { animation-delay: 2s; }
+    .orbit-node--6 .orbit-node-icon::after { animation-delay: 2.5s; }
+
+    @keyframes nodePulse {
+      0% { transform: scale(1); opacity: 0.6; }
+      100% { transform: scale(1.8); opacity: 0; }
+    }
+
+    .orbit-node-icon {
+      position: relative;
+    }
+
+    /* ========== 卡片悬停倾斜 ========== */
+    .stat-card, .cap-card {
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+
+    /* ========== 渐变流动边框（能力区） ========== */
+    .capabilities::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), var(--blue-bright), var(--purple-glow), transparent);
+      background-size: 200% 100%;
+      animation: borderFlow 4s linear infinite;
+    }
+
+    @keyframes borderFlow {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* ========== Hero 底部光弧（模拟原图地平线） ========== */
+    .hero-horizon {
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
+      height: 200px;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 100% at 50% 100%, rgba(255, 120, 30, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 80% at 50% 100%, rgba(0, 140, 255, 0.06) 0%, transparent 50%);
+    }
+
+    .hero-horizon::before {
+      content: '';
+      position: absolute;
+      bottom: 60px;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 140, 50, 0.3), rgba(0, 180, 255, 0.2), transparent);
+      box-shadow: 0 0 20px rgba(255, 140, 50, 0.2);
+      animation: horizonGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes horizonGlow {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    /* ========== 统计区光效 ========== */
+    .stats-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 200px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(0, 140, 255, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* 统计卡顶部发光线 */
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 20%; right: 20%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
+      opacity: 0;
+      transition: opacity 600ms;
+    }
+
+    .stat-card:hover::before {
+      opacity: 1;
+    }
+
+    .stat-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 统计卡 hover 内光 */
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at var(--card-mx, 50%) var(--card-my, 0%), rgba(0, 180, 255, 0.06) 0%, transparent 50%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 400ms;
+    }
+
+    .stat-card:hover::after {
+      opacity: 1;
     }
 
     /* ========== 噪点纹理 ========== */
@@ -904,7 +1234,29 @@
     <div class="hero-bg"></div>
     <div class="hero-grid"></div>
     <div class="hero-spotlight"></div>
-    <div class="hero-bottom-glow"></div>
+    <div class="scanline"></div>
+
+    <!-- 光束射线 -->
+    <div class="hero-rays"></div>
+    <div class="ray-extra ray-extra--1"></div>
+    <div class="ray-extra ray-extra--2"></div>
+    <div class="ray-extra ray-extra--3"></div>
+
+    <!-- 镜头光晕 -->
+    <div class="lens-flare lens-flare--1"></div>
+    <div class="lens-flare lens-flare--2"></div>
+    <div class="lens-flare lens-flare--3"></div>
+    <div class="lens-flare lens-flare--4"></div>
+    <div class="cross-flare"></div>
+
+    <!-- 环境粒子 -->
+    <div class="ambient-particles">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+
+    <!-- 地平线光弧 -->
+    <div class="hero-horizon"></div>
 
     <div class="hero-content">
       <h1 class="hero-title">
@@ -1039,6 +1391,7 @@
   </section>
 
   <script>
+    // 鼠标跟随光晕
     const hero = document.querySelector('.hero');
     const spotlight = document.querySelector('.hero-spotlight');
     hero.addEventListener('mousemove', (e) => {
@@ -1047,6 +1400,7 @@
       spotlight.style.setProperty('--my', `${e.clientY - rect.top}px`);
     });
 
+    // 滚动入场
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -1057,6 +1411,7 @@
     }, { threshold: 0.15 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
+    // 数字递增
     const countIO = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -1077,6 +1432,35 @@
       });
     }, { threshold: 0.5 });
     document.querySelectorAll('.count-up').forEach(el => countIO.observe(el));
+
+    // 卡片 3D 倾斜
+    document.querySelectorAll('.stat-card, .cap-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / centerY * -6;
+        const rotateY = (x - centerX) / centerX * 6;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+        card.style.setProperty('--card-mx', `${(x / rect.width) * 100}%`);
+        card.style.setProperty('--card-my', `${(y / rect.height) * 100}%`);
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+      });
+    });
+
+    // 导航滚动高亮
+    const nav = document.querySelector('.nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        nav.style.background = 'rgba(3, 6, 8, 0.95)';
+      } else {
+        nav.style.background = 'rgba(3, 6, 8, 0.8)';
+      }
+    }, { passive: true });
   </script>
 
 </body>
