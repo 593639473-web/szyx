@@ -331,7 +331,7 @@
     /* ========== 右侧视觉 ========== */
     .hero-visual {
       position: absolute;
-      right: -2%;
+      right: 8%;
       top: 50%;
       transform: translateY(-50%);
       width: 700px;
@@ -399,59 +399,157 @@
       box-shadow: 0 0 12px var(--blue-bright), 0 0 30px rgba(77, 155, 255, 0.5);
     }
 
-    /* 地球 */
+    /* 地球 - 全新3D旋转设计 */
     .orbit-earth {
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       width: 320px; height: 320px;
       border-radius: 50%;
-      background:
-        radial-gradient(circle at 35% 35%, rgba(0, 180, 255, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 65% 65%, rgba(0, 80, 180, 0.06) 0%, transparent 40%),
-        radial-gradient(circle, rgba(0, 40, 120, 0.5) 0%, rgba(0, 20, 60, 0.8) 55%, rgba(0, 5, 20, 0.95) 100%);
+      background: radial-gradient(circle at 30% 30%, #0a2a5a 0%, #051530 50%, #020a18 100%);
       box-shadow:
-        0 0 60px rgba(0, 140, 255, 0.3),
-        0 0 120px rgba(0, 100, 200, 0.15),
-        inset 0 0 60px rgba(0, 80, 180, 0.2),
-        inset -20px -20px 60px rgba(0, 0, 0, 0.5);
+        0 0 80px rgba(0, 140, 255, 0.35),
+        0 0 160px rgba(0, 100, 200, 0.15),
+        inset 0 0 80px rgba(0, 80, 180, 0.25),
+        inset -30px -30px 80px rgba(0, 0, 0, 0.6);
       overflow: hidden;
       animation: earthGlow 5s ease-in-out infinite;
     }
 
     @keyframes earthGlow {
-      0%, 100% { box-shadow: 0 0 60px rgba(0,140,255,0.3), 0 0 120px rgba(0,100,200,0.15), inset 0 0 60px rgba(0,80,180,0.2), inset -20px -20px 60px rgba(0,0,0,0.5); }
-      50% { box-shadow: 0 0 80px rgba(0,160,255,0.4), 0 0 160px rgba(0,120,220,0.2), inset 0 0 80px rgba(0,100,200,0.25), inset -20px -20px 60px rgba(0,0,0,0.5); }
+      0%, 100% { box-shadow: 0 0 80px rgba(0,140,255,0.35), 0 0 160px rgba(0,100,200,0.15), inset 0 0 80px rgba(0,80,180,0.25), inset -30px -30px 80px rgba(0,0,0,0.6); }
+      50% { box-shadow: 0 0 100px rgba(0,160,255,0.45), 0 0 200px rgba(0,120,220,0.2), inset 0 0 100px rgba(0,100,200,0.3), inset -30px -30px 80px rgba(0,0,0,0.6); }
     }
 
-    /* 地球经纬线 */
-    .orbit-earth::before {
-      content: '';
+    /* 地球大陆层（用 SVG 世界地图轮廓） */
+    .earth-land {
       position: absolute;
       inset: 0;
       border-radius: 50%;
-      background:
-        repeating-conic-gradient(from 0deg, transparent 0deg, transparent 14deg, rgba(0, 180, 255, 0.06) 14deg, rgba(0, 180, 255, 0.06) 15deg),
-        repeating-radial-gradient(circle at 50% 50%, transparent 0px, transparent 28px, rgba(0, 180, 255, 0.05) 28px, rgba(0, 180, 255, 0.05) 30px);
-      animation: earthSpin 60s linear infinite;
+      overflow: hidden;
+      animation: earthRotate 30s linear infinite;
     }
 
-    @keyframes earthSpin {
+    .earth-land svg {
+      position: absolute;
+      top: 10%; left: -20%;
+      width: 180%; height: 80%;
+      opacity: 0.35;
+      fill: rgba(0, 200, 255, 0.2);
+      stroke: rgba(0, 180, 255, 0.15);
+      stroke-width: 0.3;
+    }
+
+    @keyframes earthRotate {
+      from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
 
-    /* 地球大陆斑块（用多个渐变模拟） */
-    .orbit-earth::after {
-      content: '';
+    /* 地球经线 */
+    .earth-meridians {
       position: absolute;
       inset: 0;
       border-radius: 50%;
-      background:
-        radial-gradient(ellipse 30% 20% at 30% 40%, rgba(0, 200, 255, 0.12) 0%, transparent 100%),
-        radial-gradient(ellipse 25% 35% at 60% 55%, rgba(0, 160, 220, 0.1) 0%, transparent 100%),
-        radial-gradient(ellipse 20% 15% at 70% 30%, rgba(0, 140, 200, 0.08) 0%, transparent 100%),
-        radial-gradient(ellipse 15% 25% at 40% 70%, rgba(0, 180, 255, 0.09) 0%, transparent 100%);
-      animation: earthSpin 80s linear infinite reverse;
+      overflow: hidden;
+      animation: earthRotate 30s linear infinite;
+    }
+
+    .earth-meridian {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      border: 1px solid rgba(0, 180, 255, 0.08);
+      border-radius: 50%;
+      transform-origin: center;
+    }
+
+    .earth-meridian:nth-child(1) { transform: translateX(-50%) rotateY(0deg) scaleX(0.2); }
+    .earth-meridian:nth-child(2) { transform: translateX(-50%) rotateY(30deg) scaleX(0.5); }
+    .earth-meridian:nth-child(3) { transform: translateX(-50%) rotateY(60deg) scaleX(0.8); }
+    .earth-meridian:nth-child(4) { transform: translateX(-50%) rotateY(90deg) scaleX(1); }
+    .earth-meridian:nth-child(5) { transform: translateX(-50%) rotateY(120deg) scaleX(0.8); }
+    .earth-meridian:nth-child(6) { transform: translateX(-50%) rotateY(150deg) scaleX(0.5); }
+
+    /* 地球纬线 */
+    .earth-parallels {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .earth-parallel {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      border: 1px solid rgba(0, 180, 255, 0.06);
+    }
+
+    .earth-parallel:nth-child(1) { top: 15%; width: 80%; height: 1px; }
+    .earth-parallel:nth-child(2) { top: 30%; width: 92%; height: 1px; }
+    .earth-parallel:nth-child(3) { top: 50%; width: 100%; height: 1px; border-color: rgba(0, 180, 255, 0.1); }
+    .earth-parallel:nth-child(4) { top: 70%; width: 92%; height: 1px; }
+    .earth-parallel:nth-child(5) { top: 85%; width: 80%; height: 1px; }
+
+    /* 地球光点（城市/连接点） */
+    .earth-dots {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      animation: earthRotate 30s linear infinite;
+    }
+
+    .earth-dot {
+      position: absolute;
+      width: 4px; height: 4px;
+      background: var(--cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 6px var(--cyan), 0 0 12px rgba(0, 212, 255, 0.4);
+      animation: dotBlink 3s ease-in-out infinite;
+    }
+
+    .earth-dot:nth-child(1) { top: 32%; left: 35%; animation-delay: 0s; }
+    .earth-dot:nth-child(2) { top: 45%; left: 55%; animation-delay: 0.8s; width: 3px; height: 3px; }
+    .earth-dot:nth-child(3) { top: 38%; left: 65%; animation-delay: 1.5s; }
+    .earth-dot:nth-child(4) { top: 55%; left: 40%; animation-delay: 2.2s; width: 3px; height: 3px; }
+    .earth-dot:nth-child(5) { top: 60%; left: 60%; animation-delay: 0.5s; }
+    .earth-dot:nth-child(6) { top: 28%; left: 50%; animation-delay: 1.8s; width: 5px; height: 5px; }
+    .earth-dot:nth-child(7) { top: 50%; left: 30%; animation-delay: 2.8s; }
+    .earth-dot:nth-child(8) { top: 42%; left: 72%; animation-delay: 1.2s; width: 3px; height: 3px; }
+
+    @keyframes dotBlink {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.5); }
+    }
+
+    /* 地球连接弧线 */
+    .earth-arcs {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      overflow: hidden;
+      animation: earthRotate 30s linear infinite;
+    }
+
+    .earth-arcs svg {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+    }
+
+    .earth-arcs path {
+      fill: none;
+      stroke: rgba(0, 212, 255, 0.3);
+      stroke-width: 1;
+      stroke-dasharray: 4 6;
+      animation: arcDash 4s linear infinite;
+    }
+
+    @keyframes arcDash {
+      to { stroke-dashoffset: -20; }
     }
 
     /* 地球大气层光晕 */
@@ -459,19 +557,19 @@
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 350px; height: 350px;
+      width: 360px; height: 360px;
       border-radius: 50%;
       background: transparent;
       box-shadow:
-        0 0 40px rgba(0, 180, 255, 0.15),
-        0 0 80px rgba(0, 140, 255, 0.08);
-      border: 1px solid rgba(0, 180, 255, 0.08);
+        0 0 50px rgba(0, 180, 255, 0.18),
+        0 0 100px rgba(0, 140, 255, 0.08);
+      border: 1px solid rgba(0, 180, 255, 0.1);
       animation: atmoBreath 4s ease-in-out infinite;
     }
 
     @keyframes atmoBreath {
       0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
-      50% { transform: translate(-50%, -50%) scale(1.04); opacity: 1; }
+      50% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; }
     }
 
     /* 地球右侧高光弧 */
@@ -479,12 +577,32 @@
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%) rotate(-30deg);
-      width: 310px; height: 310px;
+      width: 330px; height: 330px;
       border-radius: 50%;
       border: 2px solid transparent;
-      border-right-color: rgba(0, 200, 255, 0.25);
-      border-top-color: rgba(0, 200, 255, 0.1);
-      filter: blur(2px);
+      border-right-color: rgba(0, 220, 255, 0.3);
+      border-top-color: rgba(0, 220, 255, 0.12);
+      filter: blur(1.5px);
+    }
+
+    /* 外围脉冲环 */
+    .orbit-earth-pulse {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 340px; height: 340px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 200, 255, 0.2);
+      animation: earthPulseRing 3s ease-out infinite;
+    }
+
+    .orbit-earth-pulse--2 {
+      animation-delay: 1.5s;
+    }
+
+    @keyframes earthPulseRing {
+      0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+      100% { transform: translate(-50%, -50%) scale(1.3); opacity: 0; }
     }
 
     /* JDH 中心文字 */
@@ -1421,8 +1539,47 @@
       <div class="orbit-ring orbit-ring--2"></div>
       <div class="orbit-ring orbit-ring--3"></div>
       <div class="orbit-earth-atmo"></div>
+      <div class="orbit-earth-pulse"></div>
+      <div class="orbit-earth-pulse orbit-earth-pulse--2"></div>
       <div class="hex-grid"></div>
-      <div class="orbit-earth"></div>
+      <div class="orbit-earth">
+        <!-- 经线 -->
+        <div class="earth-meridians">
+          <div class="earth-meridian"></div>
+          <div class="earth-meridian"></div>
+          <div class="earth-meridian"></div>
+          <div class="earth-meridian"></div>
+          <div class="earth-meridian"></div>
+          <div class="earth-meridian"></div>
+        </div>
+        <!-- 纬线 -->
+        <div class="earth-parallels">
+          <div class="earth-parallel"></div>
+          <div class="earth-parallel"></div>
+          <div class="earth-parallel"></div>
+          <div class="earth-parallel"></div>
+          <div class="earth-parallel"></div>
+        </div>
+        <!-- 城市光点 -->
+        <div class="earth-dots">
+          <div class="earth-dot"></div>
+          <div class="earth-dot"></div>
+          <div class="earth-dot"></div>
+          <div class="earth-dot"></div>
+          <div class="earth-dot"></div>
+          <div class="earth-dot"></div>
+          <div class="earth-dot"></div>
+          <div class="earth-dot"></div>
+        </div>
+        <!-- 连接弧线 -->
+        <div class="earth-arcs">
+          <svg viewBox="0 0 320 320">
+            <path d="M100,140 Q160,80 200,130"/>
+            <path d="M130,180 Q180,130 220,170"/>
+            <path d="M90,160 Q140,200 180,190"/>
+          </svg>
+        </div>
+      </div>
       <div class="orbit-earth-highlight"></div>
       <div class="orbit-arcs">
         <div class="arc arc--1"></div>
